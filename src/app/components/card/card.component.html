@@ -1,0 +1,13 @@
+<div class="card-item" [ngClass]="{ 'red': isRed(card.suit), 'allow-hover' : allowAction }">
+  <div class="front" *ngIf="isVisible">
+    <div class="value">{{card.value}}<br>{{suitSign(card.suit)}}</div>
+    <div class="value rotate">{{card.value}}<br>{{suitSign(card.suit)}}</div>
+    <div class="suit">{{suitSign(card.suit)}}</div>
+
+    <div class="info">
+      id: {{card.id}}<br>
+      pid: {{card.parentId}}
+    </div>
+  </div>
+  <div class="back" *ngIf="!isVisible"></div>
+</div>

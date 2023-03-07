@@ -1,0 +1,13 @@
+<div class="block-hand">
+  <div class="count">{{set.length}}</div>
+  <div class="active-turn"
+       *ngIf="myTurn">your turn</div>
+  <div class="hand-item" *ngFor="let card of set | orderBy: 'weight'">
+    <div class="overflow">
+      <app-card [card]="card"
+                [allowAction]="allowAction && myTurn"
+                [isVisible]="isVisible"
+                (click)="myAttack(card)"></app-card>
+    </div>
+  </div>
+</div>

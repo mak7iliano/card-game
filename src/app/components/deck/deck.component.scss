@@ -1,0 +1,64 @@
+.block-deck {
+  position: absolute;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translate(50%, -50%);
+  width: 200px;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .wrapper {
+    width: 150px;
+    height: 150px;
+    position: relative;
+
+    app-card {
+      position: absolute;
+      top: 0;
+      left: 0;
+
+      &.last {
+        transform: rotate(90deg) translateY(-80px);
+        transform-origin: center;
+
+        ::ng-deep .card-item {
+          box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
+        }
+      }
+
+      &.first {
+        ::ng-deep .card-item {
+          box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
+        }
+      }
+
+      &.single {
+        left: 25px;
+      }
+    }
+
+    ::ng-deep .card-item {
+      box-shadow: none;
+    }
+  }
+
+  .count {
+    position: absolute;
+    background-color: #ccc;
+    top: 50%;
+    left: 0;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+    text-align: center;
+    font-size: 10px;
+    transform: translate(-50%, -50%);
+  }
+}

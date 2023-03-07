@@ -1,0 +1,28 @@
+.block-battle-field {
+  display: flex;
+  border-radius: 4px;
+  height: 150px;
+  position: relative;
+  top: 50%;
+  width: 100%;
+  transform: translateY(-50%);
+
+  .hand-item {
+    flex-grow: 1;
+    width: 100px;
+
+    .overflow {
+      position: relative;
+      height: 150px;
+    }
+
+    app-card {
+      position: absolute;
+
+      &.bat-card {
+        top: 50px;
+        left: 50px;
+      }
+    }
+  }
+}

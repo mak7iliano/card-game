@@ -1,0 +1,72 @@
+.card-item {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 100px;
+  height: 150px;
+  display: flex;
+  box-sizing: border-box;
+  transition-duration: 0.3s;
+  background-color: #fff;
+  padding: 3px;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
+
+  &.allow-hover {
+    cursor: pointer;
+
+    &:hover {
+      transform: translate(-10px, -20px) rotate(-10deg);
+      transition-property: top right;
+    }
+  }
+
+  &.red {
+    color: red;
+  }
+
+  .front {
+    border: 1px solid #ccc;
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 2px;
+    position: relative;
+
+    .value {
+      position: absolute;
+      top: 5px;
+      left: 5px;
+      font-weight: bold;
+      text-align: center;
+      line-height: 16px;
+
+      &.rotate {
+        transform: rotate(180deg);
+        top: auto;
+        left: auto;
+        bottom: 5px;
+        right: 5px;
+      }
+    }
+
+    .suit {
+      font-size: 30px;
+    }
+
+    .info {
+      position: absolute;
+      left: 5px;
+      bottom: 5px;
+      font-size: 10px;
+    }
+  }
+
+  .back {
+    border: 1px solid #ccc;
+    flex-grow: 1;
+    border-radius: 2px;
+    position: relative;
+    background-image: url("/assets/shirt-bg.jpg");
+    background-size: cover;
+  }
+}

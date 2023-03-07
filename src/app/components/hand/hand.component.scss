@@ -1,0 +1,53 @@
+.block-hand {
+  display: flex;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 10px 85px 10px 10px;
+  height: 150px;
+  position: relative;
+
+  .hand-item {
+    flex-grow: 1;
+    width: 100px;
+
+    .overflow {
+      position: relative;
+      height: 150px;
+    }
+
+    app-card {
+      position: absolute;
+    }
+  }
+
+  .count {
+    position: absolute;
+    background-color: #ccc;
+    top: 50%;
+    left: 0;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+    text-align: center;
+    font-size: 10px;
+    transform: translate(-50%, -50%);
+  }
+
+  .active-turn {
+    position: absolute;
+    background-color: green;
+    top: 50%;
+    left: 100%;
+    border-radius: 10px;
+    padding: 0 20px;
+    height: 20px;
+    line-height: 20px;
+    text-align: center;
+    font-size: 10px;
+    transform: translate(-50%, -50%) rotate(90deg);
+    text-transform: uppercase;
+    white-space: nowrap;
+    color: #fff;
+  }
+}

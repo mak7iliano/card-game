@@ -1,0 +1,14 @@
+<div class="block-battle-field">
+  <div class="hand-item" *ngFor="let card of set">
+    <div class="overflow">
+      <app-card [card]="card"
+                *ngIf="!card.parentId"
+                [isVisible]="true"></app-card>
+
+      <app-card *ngIf="getBatCard(card)"
+                [card]="card && getBatCard(card)"
+                [isVisible]="true"
+                class="bat-card"></app-card>
+    </div>
+  </div>
+</div>
