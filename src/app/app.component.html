@@ -1,20 +1,23 @@
 <div class="mainer">
   <div class="play-field">
-    <app-hand class="hand-top"
+    <app-hand class="field-section"
               [set]="opponentHand"
               [options]="opponentOptions"></app-hand>
 
-    <app-hand class="hand-bottom"
+    <div class="field-section battle-section">
+      <app-battle class="column" [set]="battleSet"></app-battle>
+      <div class="column" *ngIf="!gameProcess">
+        <button class="btn btn-start"
+                (click)="startGame()">Start game</button>
+      </div>
+      <div class="column deck">
+        <app-deck [set]="deck"
+                  *ngIf="gameProcess"></app-deck>
+      </div>
+    </div>
+
+    <app-hand class="field-section"
               [set]="myHand"
               [options]="myOptions"></app-hand>
-
-    <app-battle [set]="battleSet"></app-battle>
-
-    <app-deck [set]="deck"
-              *ngIf="gameProcess"></app-deck>
-
-    <button class="btn-start"
-            (click)="startGame()"
-            *ngIf="!gameProcess">Start game</button>
   </div>
 </div>

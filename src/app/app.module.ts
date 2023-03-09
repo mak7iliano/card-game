@@ -10,6 +10,8 @@ import { HandComponent } from './components/hand/hand.component';
 import { DeckComponent } from './components/deck/deck.component';
 import { BattleComponent } from './components/battle/battle.component';
 import { MyTurnPipe } from './pipes/my-turn.pipe';
+import { BattleListPipe } from './pipes/battle-list.pipe';
+import { BatCardPipe } from './pipes/bat-card.pipe';
 
 @NgModule({
   declarations: [
@@ -18,7 +20,9 @@ import { MyTurnPipe } from './pipes/my-turn.pipe';
     HandComponent,
     DeckComponent,
     BattleComponent,
-    MyTurnPipe
+    MyTurnPipe,
+    BattleListPipe,
+    BatCardPipe
   ],
   imports: [
     BrowserModule,

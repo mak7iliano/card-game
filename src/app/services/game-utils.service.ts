@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import {ICard} from "../models/card";
 import * as _ from 'lodash';
 import {GameStorageService} from "./game-storage.service";
+import {tap} from "rxjs";
+import {GameActionsService} from "./game-actions.service";
 
 @Injectable({
   providedIn: 'root'
@@ -53,12 +55,15 @@ export class GameUtilsService {
       }
     });
     const minTrump = _.minBy([...myTrumps, ...opponentTrumps], 'weight');
-    this.gameStorage.myTurn.next(minTrump?.my || false);
-
+    // const myTurn = minTrump?.my || false;
+    const myTurn = false;
+    this.gameStorage.myTurn.next(myTurn);
+    this.gameStorage.myAttackTurn.next(myTurn);
+    return myTurn;
   }
 
-  deal(dealToMe = false) {
-    while (this.myHand.length < 6 || this.opponentHand.length < 6 ) {
+  async deal(dealToMe = false) {
+    while ((this.myHand.length < 6 || this.opponentHand.length < 6) && this.deck.length) {
       const currentCard: any = this.deck.shift();
       if (dealToMe) {
         this.myHand.push(currentCard);
@@ -66,6 +71,14 @@ export class GameUtilsService {
         this.opponentHand.push(currentCard);
       }
       dealToMe = !dealToMe;
+
+      await this.actionDelay(100);
     }
+  }
+
+  actionDelay(delay = 2000) {
+    return new Promise<void>(resolve => {
+      setTimeout(() => resolve(), delay);
+    })
   }
 }

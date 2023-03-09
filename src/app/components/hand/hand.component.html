@@ -1,13 +1,20 @@
 <div class="block-hand">
-  <div class="count">{{set.length}}</div>
-  <div class="active-turn"
-       *ngIf="myTurn">your turn</div>
+<!--  <div class="count">{{set.length}}</div>-->
+  <div class="controls" *ngIf="myTurn && gameStorage.battleSet.length">
+    <button class="btn"
+            (click)="myMoveComplete()"
+            *ngIf="myAttackTurn">All clear</button>
+    <button class="btn"
+            (click)="pickUp()"
+            *ngIf="!myAttackTurn">Pick up</button>
+  </div>
+  <div class="active-turn" *ngIf="myTurn">your turn</div>
   <div class="hand-item" *ngFor="let card of set | orderBy: 'weight'">
     <div class="overflow">
       <app-card [card]="card"
                 [allowAction]="allowAction && myTurn"
                 [isVisible]="isVisible"
-                (click)="myAttack(card)"></app-card>
+                (click)="myMove(card)"></app-card>
     </div>
   </div>
 </div>

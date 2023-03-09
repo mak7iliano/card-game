@@ -1,14 +1,19 @@
 <div class="block-battle-field">
-  <div class="hand-item" *ngFor="let card of set">
-    <div class="overflow">
-      <app-card [card]="card"
-                *ngIf="!card.parentId"
-                [isVisible]="true"></app-card>
+  <ng-container  *ngFor="let card of set; let even = even">
+    <div class="hand-item"
+         [ngClass]="{'even': even}">
+      <div class="overflow">
+        <app-card [card]="card"
+                  *ngIf="!card.parentId"
+                  [isVisible]="true"></app-card>
 
-      <app-card *ngIf="getBatCard(card)"
-                [card]="card && getBatCard(card)"
-                [isVisible]="true"
-                class="bat-card"></app-card>
+                <app-card *ngIf="card && getBatCard(card) as ddd"
+                          [card]="ddd"
+                          [isVisible]="true"
+                          class="bat-card"></app-card>
+      </div>
     </div>
-  </div>
+  </ng-container>
+
 </div>
+<!--card && getBatCard(card)-->

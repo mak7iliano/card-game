@@ -9,7 +9,7 @@ import * as _ from 'lodash';
   styleUrls: ['./battle.component.scss']
 })
 export class BattleComponent {
-  @Input() set: any
+  @Input() set: ICard[];
 
   constructor(private gameStorage: GameStorageService) {}
 

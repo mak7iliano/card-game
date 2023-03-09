@@ -1,27 +1,40 @@
 .block-battle-field {
   display: flex;
+  flex-wrap: wrap;
   border-radius: 4px;
-  height: 150px;
-  position: relative;
-  top: 50%;
-  width: 100%;
-  transform: translateY(-50%);
+  flex-grow: 1;
 
   .hand-item {
-    flex-grow: 1;
-    width: 100px;
+    width: 33%;
+    height: 50%;
+
+    &.even {
+      app-card {
+        transform: rotate(15deg);
+
+        &.bat-card {
+          top: 65px;
+          left: -20px;
+          transform: rotate(315deg);
+        }
+      }
+    }
 
     .overflow {
-      position: relative;
+      width: 100px;
       height: 150px;
+      position: relative;
     }
 
     app-card {
       position: absolute;
+      transform: rotate(-15deg);
+      top: 20px;
 
       &.bat-card {
-        top: 50px;
-        left: 50px;
+        top: 65px;
+        left: 45px;
+        transform: rotate(-45deg);
       }
     }
   }

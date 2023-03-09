@@ -7,6 +7,7 @@ import {Subject} from "rxjs";
 })
 export class GameStorageService {
   myTurn = new Subject<boolean> ();
+  myAttackTurn = new Subject<boolean> ();
   gameTrump: string;
   deck: ICard[] = [];
   myHand: ICard[] = [];

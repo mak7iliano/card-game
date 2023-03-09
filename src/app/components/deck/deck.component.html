@@ -1,12 +1,12 @@
 <div class="block-deck">
-  <div class="count">{{set.length}}</div>
+  <div class="count" *ngIf="set.length > 1">{{set.length}}</div>
   <div class="wrapper">
     <div *ngFor="let card of set; let last = last; let first = first; let index = index;">
       <app-card [card]="card"
                 [isVisible]="last"
-                [allowAction]="first"
+                [allowAction]="false"
                 [ngStyle]="{'z-index': -index+50}"
-                [ngClass]="{'last': last && !first, 'first': first, 'single': last && first}"></app-card>
+                [ngClass]="{'last': last && !first, 'first': first}"></app-card>
     </div>
   </div>
 </div>
