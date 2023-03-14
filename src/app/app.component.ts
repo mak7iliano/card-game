@@ -20,7 +20,7 @@ export class AppComponent {
   };
 
   opponentOptions = {
-    isVisible: true,
+    isVisible: false,
     isMy: false
   };
 
