@@ -28,16 +28,11 @@ export class HandComponent implements OnInit, OnDestroy {
   }
 
   public ngOnDestroy(): void {
-    this.gameStorage.myTurn.unsubscribe();
+    // this.gameStorage.myTurn.unsubscribe();
   }
 
   ngOnInit(): void {
-    this.gameStorage.myTurn.pipe(
-      tap((v) => {
-        // console.warn(v);
-      })
-    ).subscribe(val => this.myTurn = val === this.isMy)
-
+    this.gameStorage.myTurn.pipe().subscribe(val => this.myTurn = val === this.isMy)
     this.gameStorage.myAttackTurn.subscribe(val => this.myAttackTurn = val)
   }
 

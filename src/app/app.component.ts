@@ -11,35 +11,20 @@ import {GameActionsService} from "./services/game-actions.service";
 })
 
 export class AppComponent {
-  constructor(private gameUtils: GameUtilsService, public gameStorage: GameStorageService, public gameAction: GameActionsService) {}
+  constructor(public gameStorage: GameStorageService, public gameAction: GameActionsService) {}
 
-  myHand = this.gameStorage.myHand;
   myOptions = {
     allowAction: true,
     isVisible: true,
     isMy: true
   };
 
-  opponentHand = this.gameStorage.opponentHand;
   opponentOptions = {
     isVisible: true,
     isMy: false
   };
 
-  deck = this.gameStorage.deck;
-  battleSet = this.gameStorage.battleSet;
-
-  gameProcess = false;
-
-  async startGame() {
-    this.deck = this.gameStorage.deck = this.gameUtils.shuffleDeck(cards);
-
-    this.gameUtils.updateCardWeight()
-
-    this.gameProcess = true;
-    await this.gameUtils.deal();
-
-    const myTurn = this.gameUtils.checkTurn();
-    !myTurn && this.gameAction.opponentAttack(); //TODO: rework for watcher
+  startGame() {
+    this.gameAction.startGame();
   };
 }

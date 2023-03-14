@@ -6,6 +6,8 @@ import {Subject} from "rxjs";
   providedIn: 'root'
 })
 export class GameStorageService {
+  gameProcess: boolean;
+  endGameMessage: string;
   myTurn = new Subject<boolean> ();
   myAttackTurn = new Subject<boolean> ();
   gameTrump: string;

@@ -2,14 +2,13 @@ import { Injectable } from '@angular/core';
 import {ICard} from "../models/card";
 import * as _ from 'lodash';
 import {GameStorageService} from "./game-storage.service";
-import {tap} from "rxjs";
-import {GameActionsService} from "./game-actions.service";
+import {SoundService} from "./sound.service";
 
 @Injectable({
   providedIn: 'root'
 })
 export class GameUtilsService {
-  constructor(private gameStorage: GameStorageService) {}
+  constructor(private gameStorage: GameStorageService, private sound: SoundService) {}
 
   get deck() {
     return this.gameStorage.deck
@@ -32,15 +31,17 @@ export class GameUtilsService {
   }
 
   shuffleDeck(list: ICard[]) {
-    return list.sort((a, b) => 0.5 - Math.random());
+    const shuffled = [...list].sort((a, b) => 0.5 - Math.random());
+
+    const lastCard = shuffled[shuffled.length - 1];
+    this.gameTrump = lastCard.suit;
+    const trumpList = _.filter(shuffled, { suit: this.gameTrump });
+    _.each(trumpList, card => card.weight *= 10);
+
+
+    return shuffled;
   }
 
-  updateCardWeight() {
-    const lastCard = this.deck[this.deck.length - 1];
-    this.gameTrump = lastCard.suit;
-    const trumpList = _.filter(this.deck, { suit: this.gameTrump });
-    _.each(trumpList, card => card.weight *= 10);
-  }
   checkTurn() {
     const myTrumps = _.map(_.filter(this.myHand, { suit: this.gameTrump }), it => {
       return {
@@ -55,23 +56,26 @@ export class GameUtilsService {
       }
     });
     const minTrump = _.minBy([...myTrumps, ...opponentTrumps], 'weight');
-    // const myTurn = minTrump?.my || false;
-    const myTurn = false;
+    const myTurn = minTrump?.my || false;
     this.gameStorage.myTurn.next(myTurn);
     this.gameStorage.myAttackTurn.next(myTurn);
     return myTurn;
   }
 
   async deal(dealToMe = false) {
-    while ((this.myHand.length < 6 || this.opponentHand.length < 6) && this.deck.length) {
-      const currentCard: any = this.deck.shift();
-      if (dealToMe) {
-        this.myHand.push(currentCard);
-      } else {
-        this.opponentHand.push(currentCard);
+    if (this.deck.length) {
+      while ((this.myHand.length < 6 || this.opponentHand.length < 6) && this.deck.length) {
+        const currentCard: any = this.deck.shift();
+        if (dealToMe) {
+          this.myHand.push(currentCard);
+        } else {
+          this.opponentHand.push(currentCard);
+        }
+        dealToMe = !dealToMe;
+        await this.sound.deal();
+        await this.actionDelay(500);
       }
-      dealToMe = !dealToMe;
-
+    } else {
       await this.actionDelay(100);
     }
   }
@@ -80,5 +84,13 @@ export class GameUtilsService {
     return new Promise<void>(resolve => {
       setTimeout(() => resolve(), delay);
     })
+  }
+
+  battleSetUpdate(card: ICard) {
+    this.gameStorage.battleSet = [...this.gameStorage.battleSet, card];
+  }
+
+  battleSetClear() {
+    this.gameStorage.battleSet = [];
   }
 }

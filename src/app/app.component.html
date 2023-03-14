@@ -1,23 +1,27 @@
 <div class="mainer">
   <div class="play-field">
     <app-hand class="field-section"
-              [set]="opponentHand"
+              *ngIf="gameStorage.gameProcess"
+              [set]="gameStorage.opponentHand"
               [options]="opponentOptions"></app-hand>
 
     <div class="field-section battle-section">
-      <app-battle class="column" [set]="battleSet"></app-battle>
-      <div class="column" *ngIf="!gameProcess">
-        <button class="btn btn-start"
-                (click)="startGame()">Start game</button>
+      <app-battle class="column" *ngIf="gameStorage.gameProcess"
+                  [set]="gameStorage.battleSet"></app-battle>
+      <div class="column control" *ngIf="!gameStorage.gameProcess">
+        <div class="result-message" *ngIf="gameStorage.endGameMessage as msg">{{msg}}</div>
+        <button class="btn"
+                (click)="startGame()">Start new game</button>
       </div>
       <div class="column deck">
-        <app-deck [set]="deck"
-                  *ngIf="gameProcess"></app-deck>
+        <app-deck [set]="gameStorage.deck"
+                  *ngIf="gameStorage.gameProcess"></app-deck>
       </div>
     </div>
 
     <app-hand class="field-section"
-              [set]="myHand"
+              *ngIf="gameStorage.gameProcess"
+              [set]="gameStorage.myHand"
               [options]="myOptions"></app-hand>
   </div>
 </div>

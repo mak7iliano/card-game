@@ -1,5 +1,5 @@
 <div class="block-battle-field">
-  <ng-container  *ngFor="let card of set; let even = even">
+  <ng-container  *ngFor="let card of set | battleList; let even = even">
     <div class="hand-item"
          [ngClass]="{'even': even}">
       <div class="overflow">
@@ -7,8 +7,8 @@
                   *ngIf="!card.parentId"
                   [isVisible]="true"></app-card>
 
-                <app-card *ngIf="card && getBatCard(card) as ddd"
-                          [card]="ddd"
+                <app-card *ngIf="(set | batCard: card.id) as answerCard"
+                          [card]="answerCard"
                           [isVisible]="true"
                           class="bat-card"></app-card>
       </div>
